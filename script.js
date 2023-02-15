@@ -44,12 +44,28 @@ document.querySelector("#product-form").addEventListener("submit", (e)=>{
         </td>`
 
         list.appendChild(row);
-        localStorage.setItem("Selling Price",SellingP);
-        localStorage.setItem("Product",Product);
-        localStorage.setItem("Category",Category);
+        // localStorage.setItem("Selling Price",SellingP);
+        // localStorage.setItem("Product",Product);
+        // localStorage.setItem("Category",Category);
+
         selectedRow=null;
             showAlert("Product Added", "success");
        }
+       let myObj = {
+        Selling_Price : SellingP,
+        Product_Name : Product,
+        P_Category : Category 
+      };
+
+      const API_ENDPOINT =  "https://crudcrud.com/api/68a3a210218d417d81ccc495412989a6"
+      const PRODUCTS_ENDPOINT = API_ENDPOINT + "/products";
+
+      fetch(PRODUCTS_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(myObj)
+    });
+
     }
 });
 
@@ -57,6 +73,12 @@ document.querySelector("#product-list").addEventListener("click",(e)=>{
       target = e.target;
       if(target.classList.contains("delete")){
         target.parentElement.parentElement.remove();
+
+        
         alert("Product Deleted","danger");
       }
+      const response = fetch(
+        PRODUCTS_ENDPOINT + "/" + myObj._id, 
+        { method: "DELETE" }
+    )
 });
