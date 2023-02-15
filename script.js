@@ -57,7 +57,7 @@ document.querySelector("#product-form").addEventListener("submit", (e)=>{
         P_Category : Category 
       };
 
-      const API_ENDPOINT =  "https://crudcrud.com/api/68a3a210218d417d81cc"
+      const API_ENDPOINT =  "https://crudcrud.com/api/68a3a210218d417d81cc495412989a6"
       const PRODUCTS_ENDPOINT = API_ENDPOINT + "/products";
 
       fetch(PRODUCTS_ENDPOINT, {
