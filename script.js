@@ -20,7 +20,7 @@ function clearFields(){
 }
 
 
-document.querySelector("#product-form").addEventListener("submit", (e)=>{
+document.querySelector("#product-form").addEventListener("submit", (e)=> {
     e.preventDefault();
 
     const SellingP = document.querySelector("#sp").value;
@@ -48,26 +48,30 @@ document.querySelector("#product-form").addEventListener("submit", (e)=>{
         // localStorage.setItem("Product",Product);
         // localStorage.setItem("Category",Category);
 
+        let myObj = {
+          Selling_Price : SellingP,
+          Product_Name : Product,
+          P_Category : Category 
+        };
+  
+        fetch("https://crudcrud.com/api/68a3a210218d417d81ccc495412989a6", {
+          method : 'POST',
+          body : JSON.stringify(myObj),
+          headers : {
+            'content-type' : 'application/json; charset=UTF-8',
+          },
+        }) 
+           .then((response)=>response.json())
+           .then((json)=>console.log(json));
+
         selectedRow=null;
             showAlert("Product Added", "success");
        }
-       let myObj = {
-        Selling_Price : SellingP,
-        Product_Name : Product,
-        P_Category : Category 
-      };
 
-      const API_ENDPOINT =  "https://crudcrud.com/api/68a3a210218d417d81ccc495412989a6"
-      const PRODUCTS_ENDPOINT = API_ENDPOINT + "/products";
-
-      fetch(PRODUCTS_ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(myObj)
+      }
+       
+     
     });
-
-    }
-});
 
 document.querySelector("#product-list").addEventListener("click",(e)=>{
       target = e.target;
@@ -78,7 +82,7 @@ document.querySelector("#product-list").addEventListener("click",(e)=>{
         alert("Product Deleted","danger");
       }
       const response = fetch(
-        PRODUCTS_ENDPOINT + "/" + myObj._id, 
+        'https://crudcrud.com/api/68a3a210218d417d81ccc495412989a6' + "/" + myObj._id, 
         { method: "DELETE" }
     )
 });
